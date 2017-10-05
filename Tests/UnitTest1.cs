@@ -83,12 +83,31 @@ namespace Tests
         public void TransferEnergyFromShipToShield()
         {
             Ship ship = new Ship();
+
             //Given
-            shield.Energy = 10;
+            ship.shield.Energy = 10;
             //When
-            shield.TransferEnergy(shield.ShieldEnergyCost);
+            ship.shield.TransferEnergy(ship.shield.ShieldEnergyCost);
             //Then
-            Assert.AreEqual(0, shield.Energy);
+            Assert.AreEqual(0, ship.shield.Energy);
+        }
+
+        [TestMethod]
+        public void TransferEnergyFromShipToPhaser()
+        {
+            Ship ship = new Ship();
+
+            //Given
+            ship.phaser.Energy = 100;
+            //When
+            ship.phaser.TransferEnergy(ship.phaser.EnergyCost);
+            //Then
+            Assert.AreEqual(0, ship.phaser.Energy);
+        }
+
+        [TestMethod]
+        public void DealDamageWithinPhaserDistance()
+        {        
         }
     }
 }

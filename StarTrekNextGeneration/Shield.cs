@@ -12,7 +12,7 @@
         {
             IsUp = false;
             Energy = StartingEnergy;
-            ShieldEnergyCost = 10;
+            ShieldEnergyCost = 100;
         }
 
         public void Raise()
