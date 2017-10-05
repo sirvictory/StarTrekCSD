@@ -50,9 +50,14 @@
     </Otherwise>
   </Choose>
   <ItemGroup>
-    <Compile Include="Shield.cs" />
     <Compile Include="UnitTest1.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\StarTrekNextGeneration\StarTrekNextGeneration.csproj">
+      <Project>{0df793ce-9a3f-4e9e-9a22-81d384d54e68}</Project>
+      <Name>StarTrekNextGeneration</Name>
+    </ProjectReference>
   </ItemGroup>
   <Choose>
     <When Condition="'$(VisualStudioVersion)' == '10.0' And '$(IsCodedUITest)' == 'True'">

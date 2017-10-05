@@ -73,12 +73,22 @@ namespace Tests
             Assert.AreEqual(11, shield.Energy);
         }
 
-        [TestMethod, ExpectedException(typeof(ArgumentException))]
-        public void DamageIsNegative()
+        [TestMethod]
+        public void ShieldIsDown()
         {
-            shield.TakeHit(-10);   
+            Assert.IsFalse(shield.IsUp);
         }
 
-
+        [TestMethod]
+        public void TransferEnergyFromShipToShield()
+        {
+            Ship ship = new Ship();
+            //Given
+            shield.Energy = 10;
+            //When
+            shield.TransferEnergy(shield.ShieldEnergyCost);
+            //Then
+            Assert.AreEqual(0, shield.Energy);
+        }
     }
 }
