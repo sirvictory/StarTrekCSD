@@ -90,5 +90,125 @@ namespace Tests
             //Then
             Assert.AreEqual(0, shield.Energy);
         }
+
+        [TestMethod]
+        public void HealEngine()
+        {
+            Ship ship = new Ship();
+            //Given
+            ship.healEngine(100);
+            //Then
+            Assert.AreEqual(100, ship.shipEngines);
+
+        }
+
+        [TestMethod]
+        public void DamageEngine()
+        {
+            Ship ship = new Ship();
+            //Given
+            ship.healEngine(100);
+            //When
+            ship.damageEngine(40);
+            //Then
+            Assert.AreEqual(60, ship.shipEngines);
+        }
+
+        [TestMethod]
+        public void EngineDamageNegative()
+        {
+            Ship ship = new Ship();
+            //Given
+            ship.healEngine(100);
+            //When
+            ship.damageEngine(110);
+            //Then
+            Assert.AreEqual(0, ship.shipEngines);
+        }
+
+        [TestMethod]
+        public void IsEngineUsable()
+        {
+            Ship ship = new Ship();
+            //Given
+            ship.healEngine(60);
+            //When
+            ship.damageEngine(100);
+            //Then
+            Assert.IsFalse(ship.isEngineUsable);
+        }
+
+        [TestMethod]
+        public void IsEngineUsableAfterHeal()
+        {
+            Ship ship = new Ship();
+            //Given
+            ship.healEngine(60);
+            //When
+            ship.damageEngine(100);
+            ship.healEngine(10);
+            //Then
+            Assert.IsTrue(ship.isEngineUsable);
+        }
+
+        [TestMethod]
+        public void EngineMaxHealthCheck()
+        {
+            Ship ship = new Ship();
+            //Given
+            ship.healEngine(60);
+            //When
+            ship.damageEngine(100);
+            ship.healEngine(200);
+            //Then
+            Assert.AreEqual(100, ship.shipEngines);
+        }
+
+        [TestMethod]
+        public void HealPhaser()
+        {
+            Ship ship = new Ship();
+            //Given
+            ship.healPhaser(100);
+            //Then
+            Assert.AreEqual(100, ship.shipWeaponsPhaser);
+
+        }
+
+        [TestMethod]
+        public void PhaserDamageNegative()
+        {
+            Ship ship = new Ship();
+            //Given
+            ship.healPhaser(100);
+            ship.damagePhaser(200);
+            //Then
+            Assert.AreEqual(0, ship.shipWeaponsPhaser);
+        }
+
+        [TestMethod]
+        public void IsPhaserUsable()
+        {
+            Ship ship = new Ship();
+            //Given
+            ship.healPhaser(100);
+            ship.damagePhaser(200);
+            //Then
+            Assert.IsFalse(ship.isPhaserUsable);
+        }
+
+        [TestMethod]
+        public void IsPhaserUsableAfterHeal()
+        {
+            Ship ship = new Ship();
+            //Given
+            ship.healPhaser(100);
+            ship.damagePhaser(200);
+            ship.healPhaser(10);
+            //Then
+            Assert.IsTrue(ship.isPhaserUsable);
+        }
+
+
     }
 }
