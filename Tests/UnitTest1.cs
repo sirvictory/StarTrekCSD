@@ -107,10 +107,12 @@ namespace Tests
 
         [TestMethod]
         public void DealDamageWithinPhaserDistance()
-        {        
-        }
-			//When
-			ship.damageEngine(40);
+        {
+            Ship ship = new Ship();
+            //givrn
+            ship.healEngine(100);
+            //When
+            ship.damageEngine(40);
 			//Then
 			Assert.AreEqual(60, ship.shipEngines);
 		}

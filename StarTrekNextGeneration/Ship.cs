@@ -5,7 +5,6 @@ namespace StarTrekNextGeneration
 {
     public class Ship
     {
-        Shield shield;
         public Shield shield;
         public Phaser phaser;
         public Position position;
@@ -21,14 +20,13 @@ namespace StarTrekNextGeneration
         public Ship()
         {
             shield = new Shield();
-            
-            
+            phaser = new Phaser();
         }
 
         public void healEngine(int engineHealth)
         {
             shipEngines = engineHealth;
-            if(shipEngines > 100)
+            if (shipEngines > 100)
             {
                 shipEngines = 100;
             }
@@ -40,7 +38,7 @@ namespace StarTrekNextGeneration
         public void damageEngine(int engineDamage)
         {
             shipEngines -= engineDamage;
-            if(shipEngines <= 0)
+            if (shipEngines <= 0)
             {
                 shipEngines = 0;
                 isEngineUsable = false;
@@ -59,7 +57,6 @@ namespace StarTrekNextGeneration
                 phaserHealth = 100;
             }
 
-
             isPhaserUsable = true;
         }
 
@@ -76,8 +73,6 @@ namespace StarTrekNextGeneration
                 isPhaserUsable = true;
             }
         }
-
-
     }
 
     public struct Position
