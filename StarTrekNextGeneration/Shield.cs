@@ -4,7 +4,6 @@
     {
         public bool IsUp { get;  set; }
         public int Energy { get;  set; }
-        public int ShieldEnergyCost { get;  set; }
 
         public const int StartingEnergy = 10000;
 
@@ -12,7 +11,6 @@
         {
             IsUp = false;
             Energy = StartingEnergy;
-            ShieldEnergyCost = 100;
         }
 
         public void Raise()
@@ -26,15 +24,6 @@
         }
 
         public void TakeHit(int v)
-        {
-            Energy -= v;
-            if (Energy < 0)
-            {
-                Energy = 0;
-            }
-        }
-
-        public void TransferEnergy(int v)
         {
             Energy -= v;
             if (Energy < 0)

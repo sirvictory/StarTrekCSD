@@ -79,17 +79,41 @@ namespace Tests
 			Assert.IsFalse(shield.IsUp);
 		}
 
+        [TestMethod]
+        public void EnsureShipHasSufficientEnergy()
+        {
+            Ship ship = new Ship();
+
+            //When
+            bool sufficientEnergy = ship.SufficientEnergyToTransferToShield(1000);
+            //Then
+            Assert.IsTrue(sufficientEnergy);
+        }
+
+
+        [TestMethod]
+        public void EnergyRequestExceedsShipEnergyReserve()
+        {
+            Ship ship = new Ship();
+
+            //When
+            bool insufficientEnergy = ship.SufficientEnergyToTransferToShield(100000);
+            //Then
+            Assert.IsFalse(insufficientEnergy);
+        }
+
+
 		[TestMethod]
 		public void TransferEnergyFromShipToShield()
 		{
 			Ship ship = new Ship();
 
 			//Given
-			ship.shield.Energy = 10;
+			ship.shield.Energy = 9000;
 			//When
-			ship.shield.TransferEnergy(ship.shield.ShieldEnergyCost);
+            ship.TransferEnergyToShield(500);
 			//Then
-			Assert.AreEqual(0, ship.shield.Energy);
+			Assert.AreEqual(9500, ship.shield.Energy);
 		}
 
         [TestMethod]
