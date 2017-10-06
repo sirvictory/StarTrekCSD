@@ -80,7 +80,7 @@ namespace Tests
 		}
 
         [TestMethod]
-        public void EnsureShipHasSufficientEnergy()
+        public void EnsureShipHasSufficientEnergyForShield()
         {
             Ship ship = new Ship();
 
@@ -89,7 +89,6 @@ namespace Tests
             //Then
             Assert.IsTrue(sufficientEnergy);
         }
-
 
         [TestMethod]
         public void EnergyRequestExceedsShipEnergyReserve()
@@ -102,6 +101,18 @@ namespace Tests
             Assert.IsFalse(insufficientEnergy);
         }
 
+        [TestMethod, ExpectedException(typeof(ArgumentException))]
+        public void VerifyEnergyTransferCannotBeNegative()
+        {
+            Ship ship = new Ship();
+
+            //Given
+            ship.shield.Energy = 9000;
+            //When
+            ship.TransferEnergyToShield(-500);
+            //Then
+            Assert.AreEqual(9000, ship.shield.Energy);
+        }
 
 		[TestMethod]
 		public void TransferEnergyFromShipToShield()

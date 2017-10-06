@@ -27,12 +27,16 @@ namespace StarTrekNextGeneration
 
         public void TransferEnergyToShield(int energyToTransfer)
         {
+            if (energyToTransfer < 0)
+            {
+                ArgumentException exception = new ArgumentException();
+                throw exception;
+            }
+                
             if (SufficientEnergyToTransferToShield(energyToTransfer))
             {
                 DebitEnergyFromReserve(energyToTransfer);
             }
-            
-            
         }
 
         public bool SufficientEnergyToTransferToShield(int amountOfEnergy)
@@ -56,8 +60,6 @@ namespace StarTrekNextGeneration
                shipEnergyReserve -= debitEnergy;
            }
         }
-
-
 
         public void healEngine(int engineHealth)
         {
@@ -98,6 +100,7 @@ namespace StarTrekNextGeneration
 
         public void damagePhaser(int phaserDamage)
         {
+            // For every 300 units of damage = 1 star date to repair
             shipWeaponsPhaser -= phaserDamage;
             if (shipWeaponsPhaser <= 0)
             {
@@ -108,6 +111,13 @@ namespace StarTrekNextGeneration
             {
                 isPhaserUsable = true;
             }
+        }
+
+
+        public void DamageShield(int shieldDamage)
+        {
+            // For every 500 units of damage = 1 star date to repair
+           
         }
     }
 
