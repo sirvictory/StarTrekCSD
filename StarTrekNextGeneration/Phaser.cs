@@ -2,7 +2,7 @@
 
 namespace StarTrekNextGeneration
 {
-    public class Phaser
+    public class Phaser : SubSystem
     {
         public int EnergyCost;
         public int Energy;
@@ -10,13 +10,14 @@ namespace StarTrekNextGeneration
 
         public Phaser()
         {
+            systemName = "Phaser";
             EnergyCost = 100;
             Distance = 1000;
         }
 
-        public void TransferEnergy(int v)
+        public void TransferEnergy(int energyAmount)
         {
-            Energy -= v;
+            Energy -= energyAmount;
             if (Energy < 0)
             {
                 Energy = 0;

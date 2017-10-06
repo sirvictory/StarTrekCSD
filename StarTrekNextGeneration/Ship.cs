@@ -8,6 +8,7 @@ namespace StarTrekNextGeneration
         public Shield shield;
         public Phaser phaser;
         public Position position;
+
         public bool isEngineUsable { get; internal set; }
         public bool isPhaserUsable { get; internal set; }
 
@@ -16,13 +17,15 @@ namespace StarTrekNextGeneration
         public int shipWeaponsPhoton { get; internal set; }
         public int shipEngines { get; internal set; }
 
+        public const int shipEnergyReserveMax = 80000;
+
 
         public Ship()
         {
             shield = new Shield();
             phaser = new Phaser();
 
-            shipEnergyReserve = 80000;
+            shipEnergyReserve = shipEnergyReserveMax;
         }
 
         public void TransferEnergyToShield(int energyToTransfer)
@@ -32,7 +35,7 @@ namespace StarTrekNextGeneration
                 ArgumentException exception = new ArgumentException();
                 throw exception;
             }
-                
+
             if (SufficientEnergyToTransferToShield(energyToTransfer))
             {
                 DebitEnergyFromReserve(energyToTransfer);
@@ -46,78 +49,25 @@ namespace StarTrekNextGeneration
 
         private void DebitEnergyFromReserve(int debitEnergy)
         {
-           int estimatedCostOfEnergy = shield.Energy + debitEnergy;
+            int estimatedCostOfEnergy = shield.Energy + debitEnergy;
 
-           if (estimatedCostOfEnergy > 10000)
-           {
-               // give ship back excess energy
-               shipEnergyReserve += (estimatedCostOfEnergy - 10000);
-               shield.Energy = 10000;
-           }
-           else
-           {
-               shield.Energy += debitEnergy;
-               shipEnergyReserve -= debitEnergy;
-           }
-        }
-
-        public void healEngine(int engineHealth)
-        {
-            shipEngines = engineHealth;
-            if (shipEngines > 100)
+            if (estimatedCostOfEnergy > Shield.EnergyMax)
             {
-                shipEngines = 100;
-            }
-
-
-            isEngineUsable = true;
-        }
-
-        public void damageEngine(int engineDamage)
-        {
-            shipEngines -= engineDamage;
-            if (shipEngines <= 0)
-            {
-                shipEngines = 0;
-                isEngineUsable = false;
+                // give ship back excess energy
+                shipEnergyReserve += (estimatedCostOfEnergy - Shield.EnergyMax);
+                shield.Energy = Shield.EnergyMax;
             }
             else
             {
-                isEngineUsable = true;
+                shield.Energy += debitEnergy;
+                shipEnergyReserve -= debitEnergy;
             }
         }
-
-        public void healPhaser(int phaserHealth)
-        {
-            shipWeaponsPhaser = phaserHealth;
-            if (phaserHealth > 100)
-            {
-                phaserHealth = 100;
-            }
-
-            isPhaserUsable = true;
-        }
-
-        public void damagePhaser(int phaserDamage)
-        {
-            // For every 300 units of damage = 1 star date to repair
-            shipWeaponsPhaser -= phaserDamage;
-            if (shipWeaponsPhaser <= 0)
-            {
-                shipWeaponsPhaser = 0;
-                isPhaserUsable = false;
-            }
-            else
-            {
-                isPhaserUsable = true;
-            }
-        }
-
 
         public void DamageShield(int shieldDamage)
         {
             // For every 500 units of damage = 1 star date to repair
-           
+
         }
     }
 
